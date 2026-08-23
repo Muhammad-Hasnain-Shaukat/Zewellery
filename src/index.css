@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warm-ivory: #FAF7F2;
+  --color-deep-charcoal: #24211F;
+  --color-champagne-gold: #C6A15B;
+  --color-champagne-gold-hover: #B59048;
+  --color-champagne-gold-light: rgba(198, 161, 91, 0.12);
+  --color-soft-beige: #EFE7DC;
+  --color-soft-beige-light: #F5EFEB;
+  --color-pure-white: #FFFFFF;
+  --color-subtle-border: #E5DED4;
+  --color-charcoal-muted: #57524E;
+  --color-charcoal-light: #7A7470;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base resets & global styles with strict zero-horizontal-overflow */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FAF7F2;
+  color: #24211F;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: #FAF7F2;
+  color: #24211F;
+  line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Images & media cannot expand parent beyond viewport */
+img, video, iframe, canvas {
+  max-width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5DED4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A15B;
+}
+
+::selection {
+  background-color: rgba(198, 161, 91, 0.2);
+  color: #24211F;
+}
