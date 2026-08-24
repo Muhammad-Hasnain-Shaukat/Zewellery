@@ -39,12 +39,12 @@ export default function ProductCard({
             e.stopPropagation();
             onToggleWishlist(product);
           }}
-          className={`absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white/85 backdrop-blur-xs flex items-center justify-center transition-all cursor-pointer shadow-xs ${
-            isWishlisted ? 'text-red-500 scale-110' : 'text-[#24211F] hover:text-red-500 hover:scale-105'
+          className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 z-10 w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center transition-all cursor-pointer shadow-xs shrink-0 ${
+            isWishlisted ? 'text-red-500 scale-105' : 'text-[#24211F] hover:text-red-500 hover:scale-105'
           }`}
           aria-label={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
         >
-          <Heart size={15} fill={isWishlisted ? '#EF4444' : 'none'} color={isWishlisted ? '#EF4444' : 'currentColor'} />
+          <Heart size={14} fill={isWishlisted ? '#EF4444' : 'none'} color={isWishlisted ? '#EF4444' : 'currentColor'} />
         </button>
 
         {/* Main Product Image */}

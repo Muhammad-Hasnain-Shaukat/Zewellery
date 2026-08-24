@@ -84,12 +84,12 @@ export default function Header({
           isScrolled ? 'bg-[#FAF7F2]/98 backdrop-blur-md shadow-2xs' : ''
         }`}
       >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[58px] sm:h-[62px]">
+        <div className="max-w-[1400px] mx-auto px-2.5 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-[56px] sm:h-[62px] gap-2">
             {/* Left & Center-Left Flow: Navigation Links + Brand Logo (Image 1 Layout) */}
-            <div className="flex items-center gap-6 xl:gap-8">
+            <div className="flex items-center gap-1.5 sm:gap-6 xl:gap-8 min-w-0">
               {/* Desktop Nav Links */}
-              <nav className="hidden lg:flex items-center gap-5 xl:gap-6" aria-label="Main Navigation">
+              <nav className="hidden lg:flex items-center gap-5 xl:gap-6 shrink-0" aria-label="Main Navigation">
                 <a
                   href="/"
                   className={`text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
@@ -220,21 +220,21 @@ export default function Header({
               </nav>
 
               {/* Mobile Hamburger */}
-              <div className="flex lg:hidden items-center">
+              <div className="flex lg:hidden items-center shrink-0">
                 <button
-                  className="flex items-center justify-center w-9 h-9 text-[#24211F] hover:text-[#C5A059]"
+                  className="flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059] cursor-pointer"
                   onClick={() => setMobileMenuOpen(true)}
                   aria-label="Open Mobile Menu"
                 >
-                  <Menu size={20} />
+                  <Menu size={19} />
                 </button>
               </div>
 
-              {/* Brand Logo - Moved to Left, Compact, No top icon (Image 1 match) */}
-              <div className="flex flex-col items-start justify-center">
+              {/* Brand Logo - Moved to Left, Compact, Responsive */}
+              <div className="flex flex-col items-start justify-center min-w-0">
                 <a
                   href="/"
-                  className="font-serif text-xl sm:text-[22px] tracking-[0.24em] text-[#24211F] font-semibold uppercase leading-none hover:text-[#C5A059] transition-colors"
+                  className="font-serif text-[17px] xs:text-xl sm:text-[22px] tracking-[0.14em] xs:tracking-[0.18em] sm:tracking-[0.24em] text-[#24211F] font-semibold uppercase leading-none hover:text-[#C5A059] transition-colors whitespace-nowrap"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('/');
@@ -242,14 +242,14 @@ export default function Header({
                 >
                   ZEWELLERY<span className="text-[#C5A059] font-serif">.PK</span>
                 </a>
-                <span className="text-[6.5px] sm:text-[7px] tracking-[0.26em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none">
+                <span className="text-[5.5px] xs:text-[6.5px] sm:text-[7px] tracking-[0.14em] xs:tracking-[0.20em] sm:tracking-[0.26em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none whitespace-nowrap">
                   TIMELESS BEAUTY. MADE FOR YOU.
                 </span>
               </div>
             </div>
 
-            {/* Right: Search Box + Action Icons (Image 1 Layout) */}
-            <div className="flex items-center gap-3 sm:gap-3.5">
+            {/* Right: Search Box + Action Icons (Fully Responsive, Never Cuts Off) */}
+            <div className="flex items-center gap-1 xs:gap-1.5 sm:gap-3 lg:gap-3.5 shrink-0">
               {/* Search Box with icon inside on right */}
               <form
                 onSubmit={handleSearchSubmit}
@@ -271,7 +271,7 @@ export default function Header({
 
               {/* Search icon for mobile */}
               <button
-                className="md:hidden flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059]"
+                className="md:hidden flex items-center justify-center w-7.5 h-7.5 sm:w-8 sm:h-8 text-[#24211F] hover:text-[#C5A059] shrink-0 cursor-pointer"
                 onClick={onOpenSearch}
                 aria-label="Search Boutique"
               >
@@ -280,7 +280,7 @@ export default function Header({
 
               {/* User Account */}
               <button
-                className={`relative flex items-center justify-center w-8 h-8 rounded-full transition-colors cursor-pointer ${
+                className={`relative flex items-center justify-center w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-full transition-colors cursor-pointer shrink-0 ${
                   currentUser
                     ? 'text-[#C5A059] bg-[#C5A059]/15'
                     : 'text-[#24211F] hover:text-[#C5A059]'
@@ -289,19 +289,19 @@ export default function Header({
                 aria-label="Client Account"
                 title={currentUser ? `Signed in as ${currentUser.name}` : 'Sign In / Register'}
               >
-                <User size={18} strokeWidth={1.6} />
+                <User size={17} strokeWidth={1.6} />
               </button>
 
               {/* Wishlist Heart */}
               <button
-                className="relative flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059] transition-colors cursor-pointer"
+                className="relative flex items-center justify-center w-7.5 h-7.5 sm:w-8 sm:h-8 text-[#24211F] hover:text-[#C5A059] transition-colors cursor-pointer shrink-0"
                 onClick={onOpenWishlist}
                 aria-label="View Saved Pieces"
                 title="Wishlist"
               >
-                <Heart size={18} strokeWidth={1.6} />
+                <Heart size={17} strokeWidth={1.6} />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-[#C5A059] text-white text-[8.5px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-0.5 -right-0.5 bg-[#C5A059] text-white text-[8px] sm:text-[8.5px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
                     {wishlistCount}
                   </span>
                 )}
@@ -309,14 +309,14 @@ export default function Header({
 
               {/* Shopping Bag Drawer Button */}
               <button
-                className="relative flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059] transition-colors cursor-pointer"
+                className="relative flex items-center justify-center w-7.5 h-7.5 sm:w-8 sm:h-8 text-[#24211F] hover:text-[#C5A059] transition-colors cursor-pointer shrink-0"
                 onClick={onOpenCart}
                 aria-label="Shopping Bag"
                 title="Shopping Bag"
               >
-                <ShoppingBag size={18} strokeWidth={1.6} />
+                <ShoppingBag size={17} strokeWidth={1.6} />
                 {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-[#24211F] text-white text-[8.5px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-0.5 -right-0.5 bg-[#24211F] text-white text-[8px] sm:text-[8.5px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
                     {cartCount}
                   </span>
                 )}

@@ -26,22 +26,22 @@ export default function TrustStrip() {
   ];
 
   return (
-    <section className="bg-white border-y border-[#E8E0D5] py-6 sm:py-7" aria-label="Customer Benefits and Guarantees">
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center sm:justify-items-start">
+    <section className="bg-white border-y border-[#E8E0D5] py-5 sm:py-7" aria-label="Customer Benefits and Guarantees">
+      <div className="max-w-[1360px] mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-8 items-center">
           {benefits.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-3.5 w-full justify-center sm:justify-start"
+              className="flex items-center gap-2 sm:gap-3.5 w-full"
             >
               <div className="shrink-0 flex items-center justify-center">
                 {item.icon}
               </div>
-              <div className="flex flex-col">
-                <h3 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-[#24211F] leading-tight">
+              <div className="flex flex-col min-w-0">
+                <h3 className="text-[10px] xs:text-[11.5px] font-bold tracking-[0.1em] sm:tracking-[0.14em] uppercase text-[#24211F] leading-tight truncate">
                   {item.title}
                 </h3>
-                <p className="text-[11px] text-[#7A7470] mt-0.5 font-normal">
+                <p className="text-[9.5px] xs:text-[11px] text-[#7A7470] mt-0.5 font-normal truncate">
                   {item.subtitle}
                 </p>
               </div>

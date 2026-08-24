@@ -58,21 +58,21 @@ export default function AccountPage({
     <div className="min-h-screen bg-warm-ivory py-10 sm:py-14 animate-fade-in">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Breadcrumb */}
-        <div className="flex items-center justify-between pb-6 border-b border-subtle-border mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-subtle-border mb-8">
           <div>
             <span className="text-[10.5px] font-bold tracking-[0.24em] uppercase text-champagne-gold block mb-1">
               CLIENT DASHBOARD
             </span>
-            <h1 className="font-serif text-3xl sm:text-4xl text-deep-charcoal">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl text-deep-charcoal">
               Welcome, {currentUser.name}
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             {currentUser.role === 'admin' && (
               <button
                 onClick={() => onNavigate('/admin')}
-                className="py-2 px-4 bg-champagne-gold text-deep-charcoal text-xs font-bold uppercase tracking-wider rounded hover:bg-champagne-gold-hover transition-colors cursor-pointer"
+                className="py-2 px-3.5 sm:px-4 bg-champagne-gold text-deep-charcoal text-xs font-bold uppercase tracking-wider rounded hover:bg-champagne-gold-hover transition-colors cursor-pointer"
               >
                 Admin Panel &rarr;
               </button>

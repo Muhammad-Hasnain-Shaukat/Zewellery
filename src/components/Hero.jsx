@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Play, Pause, ChevronDown } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 export default function Hero({ onShopNow, onExploreCollection }) {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -11,34 +9,12 @@ export default function Hero({ onShopNow, onExploreCollection }) {
       videoRef.current.muted = true;
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch((err) => {
-            console.log('Autoplay prevented by browser:', err);
-            setIsPlaying(false);
-          });
+        playPromise.catch((err) => {
+          console.log('Autoplay prevented by browser:', err);
+        });
       }
     }
   }, []);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((e) => console.log('Play error:', e));
-    }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
 
   const scrollToNextSection = () => {
     const nextSection = document.getElementById('new-collection-banner');
@@ -62,29 +38,6 @@ export default function Hero({ onShopNow, onExploreCollection }) {
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
 
-        {/* Video Playback & Audio Controls Bar (Bottom Right) */}
-        <div className="absolute bottom-4 right-3 sm:bottom-8 sm:right-8 z-20 flex items-center gap-2 sm:gap-2.5 bg-black/65 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/20 text-white text-xs shadow-xl">
-          <button
-            onClick={togglePlay}
-            className="p-1 hover:text-[#C5A059] transition-colors cursor-pointer"
-            aria-label={isPlaying ? 'Pause video' : 'Play video'}
-            title={isPlaying ? 'Pause Video' : 'Play Video'}
-          >
-            {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-          </button>
-          <div className="w-px h-3.5 bg-white/30" />
-          <button
-            onClick={toggleMute}
-            className="p-1 hover:text-[#C5A059] transition-colors cursor-pointer"
-            aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-            title={isMuted ? 'Unmute Video' : 'Mute Video'}
-          >
-            {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-          </button>
-          <span className="text-[9.5px] tracking-widest uppercase text-[#C5A059] font-bold pl-1">
-            4K UHD
-          </span>
-        </div>
 
         {/* Floating Scroll Indicator (Prompts User to Scroll Down) */}
         <button

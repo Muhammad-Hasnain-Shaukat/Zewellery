@@ -249,7 +249,7 @@ export default function ProductDetailPage({
               </p>
 
               {/* Highlights Feature Pills */}
-              <div className="grid grid-cols-2 gap-2.5 mb-7 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-7 text-xs">
                 <div className="p-3 bg-white rounded border border-subtle-border flex items-center gap-2.5">
                   <Sparkles size={16} className="text-champagne-gold shrink-0" />
                   <span>Triple 18K Micron Gold Finish</span>
@@ -261,8 +261,8 @@ export default function ProductDetailPage({
               </div>
 
               {/* Quantity Selector & Action CTAs */}
-              <div className="flex items-center gap-4 mb-6 flex-wrap">
-                <div className="inline-flex items-center border border-subtle-border bg-white rounded p-1">
+              <div className="flex items-center gap-3 sm:gap-4 mb-6 flex-wrap">
+                <div className="inline-flex items-center border border-subtle-border bg-white rounded p-1 shrink-0">
                   <button
                     type="button"
                     className="w-8 h-8 flex items-center justify-center text-sm text-deep-charcoal hover:bg-warm-ivory rounded cursor-pointer"
@@ -271,7 +271,7 @@ export default function ProductDetailPage({
                   >
                     -
                   </button>
-                  <span className="w-10 text-center font-bold text-sm">{quantity}</span>
+                  <span className="w-8 sm:w-10 text-center font-bold text-sm">{quantity}</span>
                   <button
                     type="button"
                     className="w-8 h-8 flex items-center justify-center text-sm text-deep-charcoal hover:bg-warm-ivory rounded cursor-pointer"
@@ -285,7 +285,7 @@ export default function ProductDetailPage({
                 <button
                   type="button"
                   onClick={() => onAddToCart(product, quantity)}
-                  className="grow inline-flex items-center justify-center gap-2 bg-deep-charcoal hover:bg-champagne-gold text-white py-3.5 px-6 text-xs font-bold uppercase tracking-[0.14em] rounded transition-all duration-300 shadow-md cursor-pointer"
+                  className="grow min-w-[160px] inline-flex items-center justify-center gap-2 bg-deep-charcoal hover:bg-champagne-gold text-white py-3.5 px-4 sm:px-6 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] rounded transition-all duration-300 shadow-md cursor-pointer"
                 >
                   <ShoppingBag size={15} />
                   <span>{isInCart ? 'ADD ANOTHER TO BAG' : 'ADD TO SHOPPING BAG'}</span>
@@ -294,7 +294,7 @@ export default function ProductDetailPage({
                 <button
                   type="button"
                   onClick={() => onToggleWishlist(product)}
-                  className={`p-3.5 rounded border border-subtle-border bg-white transition-all cursor-pointer ${
+                  className={`p-3 sm:p-3.5 rounded border border-subtle-border bg-white transition-all cursor-pointer shrink-0 ${
                     isWishlisted ? 'text-red-500 border-red-200' : 'text-deep-charcoal hover:text-red-500'
                   }`}
                   aria-label="Save to Wishlist"
@@ -320,10 +320,10 @@ export default function ProductDetailPage({
 
           {/* Specifications, Dimensions & Reviews Tabs */}
           <div className="mt-16 sm:mt-20 border-t border-subtle-border pt-10">
-            <div className="flex border-b border-subtle-border mb-8 overflow-x-auto">
+            <div className="flex border-b border-subtle-border mb-8 overflow-x-auto whitespace-nowrap">
               <button
                 onClick={() => setActiveTab('details')}
-                className={`py-3 px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all ${
+                className={`py-3 px-4 sm:px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all shrink-0 ${
                   activeTab === 'details'
                     ? 'border-champagne-gold text-champagne-gold'
                     : 'border-transparent text-charcoal-muted hover:text-deep-charcoal'
@@ -333,7 +333,7 @@ export default function ProductDetailPage({
               </button>
               <button
                 onClick={() => setActiveTab('care')}
-                className={`py-3 px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all ${
+                className={`py-3 px-4 sm:px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all shrink-0 ${
                   activeTab === 'care'
                     ? 'border-champagne-gold text-champagne-gold'
                     : 'border-transparent text-charcoal-muted hover:text-deep-charcoal'
@@ -343,7 +343,7 @@ export default function ProductDetailPage({
               </button>
               <button
                 onClick={() => setActiveTab('reviews')}
-                className={`py-3 px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all ${
+                className={`py-3 px-4 sm:px-6 text-xs font-bold uppercase tracking-wider border-b-2 cursor-pointer transition-all shrink-0 ${
                   activeTab === 'reviews'
                     ? 'border-champagne-gold text-champagne-gold'
                     : 'border-transparent text-charcoal-muted hover:text-deep-charcoal'

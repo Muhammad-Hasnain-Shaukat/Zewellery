@@ -25,15 +25,15 @@ export default function CartDrawer({
       />
 
       <aside
-        className={`fixed top-0 right-0 bottom-0 w-[420px] max-w-[90vw] bg-warm-ivory z-50 shadow-2xl flex flex-col transition-transform duration-300 ${
+        className={`fixed top-0 right-0 bottom-0 w-full max-w-[420px] bg-warm-ivory z-50 shadow-2xl flex flex-col transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-label="Shopping Bag"
       >
-        <div className="p-6 flex items-center justify-between border-b border-subtle-border">
+        <div className="p-4 sm:p-6 flex items-center justify-between border-b border-subtle-border">
           <div className="flex items-center gap-2">
             <ShoppingBag size={20} className="text-champagne-gold" />
-            <h2 className="font-serif text-lg font-medium text-deep-charcoal">
+            <h2 className="font-serif text-base sm:text-lg font-medium text-deep-charcoal">
               Your Shopping Bag ({items.reduce((s, i) => s + i.quantity, 0)})
             </h2>
           </div>
@@ -47,7 +47,7 @@ export default function CartDrawer({
         </div>
 
         {/* Free shipping progress */}
-        <div className="p-4 bg-soft-beige border-b border-subtle-border text-xs text-deep-charcoal">
+        <div className="p-3.5 sm:p-4 bg-soft-beige border-b border-subtle-border text-xs text-deep-charcoal">
           {remainingForFreeShipping > 0 ? (
             <span>
               Add <strong className="font-bold">Rs. {remainingForFreeShipping.toLocaleString()}</strong> more to unlock <strong className="font-bold">FREE EXPRESS SHIPPING</strong>
@@ -82,20 +82,20 @@ export default function CartDrawer({
           </div>
         ) : (
           <>
-            <div className="grow overflow-y-auto p-6 flex flex-col gap-4">
+            <div className="grow overflow-y-auto p-4 sm:p-6 flex flex-col gap-4">
               {items.map((item) => (
-                <div key={item.id} className="grid grid-cols-[70px_1fr_auto] gap-4 items-center pb-4 border-b border-subtle-border">
+                <div key={item.id} className="grid grid-cols-[64px_1fr_auto] sm:grid-cols-[70px_1fr_auto] gap-3 sm:gap-4 items-center pb-4 border-b border-subtle-border">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-[70px] h-20 object-cover rounded border border-subtle-border bg-white"
+                    className="w-16 h-18 sm:w-[70px] sm:h-20 object-cover rounded border border-subtle-border bg-white"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = '/images/products/brac-1-main.jpg';
                     }}
                   />
-                  <div>
-                    <h4 className="font-serif text-sm font-medium text-deep-charcoal mb-1 line-clamp-1">{item.name}</h4>
+                  <div className="min-w-0">
+                    <h4 className="font-serif text-xs sm:text-sm font-medium text-deep-charcoal mb-1 line-clamp-1">{item.name}</h4>
                     <div className="text-xs font-bold text-champagne-gold">Rs. {item.price.toLocaleString()}</div>
                     <div className="inline-flex items-center border border-subtle-border bg-white rounded mt-2">
                       <button
@@ -118,7 +118,7 @@ export default function CartDrawer({
 
                   <button
                     onClick={() => onRemoveItem(item.id)}
-                    className="text-charcoal-light hover:text-red-500 p-2 cursor-pointer transition-colors"
+                    className="text-charcoal-light hover:text-red-500 p-2 cursor-pointer transition-colors shrink-0"
                     aria-label={`Remove ${item.name}`}
                     title="Remove item"
                   >
@@ -128,7 +128,7 @@ export default function CartDrawer({
               ))}
             </div>
 
-            <div className="p-6 border-t border-subtle-border bg-white">
+            <div className="p-4 sm:p-6 border-t border-subtle-border bg-white">
               <div className="flex justify-between text-base font-bold text-deep-charcoal mb-4">
                 <span>Subtotal</span>
                 <span>Rs. {subtotal.toLocaleString()}</span>

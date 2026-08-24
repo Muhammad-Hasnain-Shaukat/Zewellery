@@ -319,32 +319,32 @@ export default function AdminDashboard({ onNavigate }) {
   return (
     <div className="min-h-screen bg-soft-beige/40 text-deep-charcoal pb-20 animate-fade-in">
       {/* Top Header Bar */}
-      <header className="bg-deep-charcoal text-warm-ivory py-4 px-4 sm:px-8 border-b border-champagne-gold/30 flex items-center justify-between sticky top-0 z-40 shadow-md">
-        <div className="flex items-center gap-3">
+      <header className="bg-deep-charcoal text-warm-ivory py-3 sm:py-4 px-3 sm:px-8 border-b border-champagne-gold/30 flex items-center justify-between sticky top-0 z-40 shadow-md gap-2">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             onClick={() => onNavigate('/')}
-            className="text-warm-ivory/70 hover:text-champagne-gold transition-colors flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider cursor-pointer"
+            className="text-warm-ivory/70 hover:text-champagne-gold transition-colors flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider cursor-pointer shrink-0"
           >
             <ArrowLeft size={15} />
             <span className="hidden sm:inline">Storefront</span>
           </button>
           <span className="text-white/30 hidden sm:inline">&bull;</span>
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={18} className="text-champagne-gold" />
-            <span className="font-serif font-bold text-sm sm:text-base tracking-wider text-warm-ivory">
-              ZEWELLERY ADMIN CONSOLE
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <ShieldCheck size={17} className="text-champagne-gold shrink-0" />
+            <span className="font-serif font-bold text-xs sm:text-base tracking-wider text-warm-ivory truncate">
+              ZEWELLERY ADMIN
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="text-right hidden sm:block">
             <div className="text-xs font-bold text-warm-ivory">{currentUser.name}</div>
             <div className="text-[10px] text-champagne-gold uppercase tracking-wider">{currentUser.email}</div>
           </div>
           <button
             onClick={handleAdminSignOut}
-            className="flex items-center gap-1.5 py-1.5 px-3 bg-red-900/40 hover:bg-red-900/70 border border-red-500/40 rounded text-red-200 text-xs font-semibold cursor-pointer transition-all"
+            className="flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 bg-red-900/40 hover:bg-red-900/70 border border-red-500/40 rounded text-red-200 text-xs font-semibold cursor-pointer transition-all shrink-0"
             title="Sign Out as Admin"
           >
             <LogOut size={14} />

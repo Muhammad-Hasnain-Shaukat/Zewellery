@@ -22,16 +22,16 @@ export default function WishlistDrawer({
 
       {/* Drawer */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 w-[440px] max-w-[92vw] bg-warm-ivory z-50 shadow-2xl flex flex-col transition-transform duration-300 ${
+        className={`fixed top-0 right-0 bottom-0 w-full max-w-[440px] bg-warm-ivory z-50 shadow-2xl flex flex-col transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-label="Your Wishlist"
       >
         {/* Header */}
-        <div className="p-6 flex items-center justify-between border-b border-subtle-border">
+        <div className="p-4 sm:p-6 flex items-center justify-between border-b border-subtle-border">
           <div className="flex items-center gap-2.5">
             <Heart size={20} className="text-red-500" fill="#EF4444" />
-            <h2 className="font-serif text-lg font-medium text-deep-charcoal">
+            <h2 className="font-serif text-base sm:text-lg font-medium text-deep-charcoal">
               My Saved Pieces ({items.length})
             </h2>
           </div>
@@ -66,16 +66,16 @@ export default function WishlistDrawer({
           </div>
         ) : (
           <>
-            <div className="grow overflow-y-auto p-6 flex flex-col gap-4">
+            <div className="grow overflow-y-auto p-4 sm:p-6 flex flex-col gap-4">
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="grid grid-cols-[72px_1fr_auto] gap-4 items-center p-3 bg-white border border-subtle-border rounded-md hover:border-champagne-gold transition-all"
+                  className="grid grid-cols-[64px_1fr_auto] sm:grid-cols-[72px_1fr_auto] gap-3 sm:gap-4 items-center p-3 bg-white border border-subtle-border rounded-md hover:border-champagne-gold transition-all"
                 >
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-[72px] h-[72px] object-cover rounded bg-soft-beige cursor-pointer"
+                    className="w-16 h-16 sm:w-[72px] sm:h-[72px] object-cover rounded bg-soft-beige cursor-pointer shrink-0"
                     onClick={() => {
                       onClose();
                       onNavigate(`/product/${item.id}`);
@@ -85,12 +85,12 @@ export default function WishlistDrawer({
                       e.target.src = '/images/products/brac-1-main.jpg';
                     }}
                   />
-                  <div>
+                  <div className="min-w-0">
                     <span className="text-[10px] uppercase tracking-wider text-charcoal-light block">
                       {item.category}
                     </span>
                     <h4
-                      className="font-serif text-sm font-medium text-deep-charcoal hover:text-champagne-gold transition-colors cursor-pointer line-clamp-1"
+                      className="font-serif text-xs sm:text-sm font-medium text-deep-charcoal hover:text-champagne-gold transition-colors cursor-pointer line-clamp-1"
                       onClick={() => {
                         onClose();
                         onNavigate(`/product/${item.id}`);
@@ -98,22 +98,22 @@ export default function WishlistDrawer({
                     >
                       {item.name}
                     </h4>
-                    <div className="text-xs font-bold text-champagne-gold mt-1">
+                    <div className="text-xs font-bold text-champagne-gold mt-0.5">
                       Rs. {item.price.toLocaleString()}
                     </div>
 
                     <button
                       onClick={() => onMoveToCart(item)}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase text-deep-charcoal hover:text-champagne-gold mt-2 cursor-pointer transition-colors"
+                      className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-bold tracking-wider uppercase text-deep-charcoal hover:text-champagne-gold mt-1.5 cursor-pointer transition-colors"
                     >
-                      <ShoppingBag size={13} />
+                      <ShoppingBag size={12} />
                       <span>Move to Bag</span>
                     </button>
                   </div>
 
                   <button
                     onClick={() => onRemoveItem(item)}
-                    className="text-charcoal-light hover:text-red-500 p-2 cursor-pointer transition-colors"
+                    className="text-charcoal-light hover:text-red-500 p-2 cursor-pointer transition-colors shrink-0"
                     aria-label={`Remove ${item.name} from wishlist`}
                     title="Remove item"
                   >
@@ -123,7 +123,7 @@ export default function WishlistDrawer({
               ))}
             </div>
 
-            <div className="p-6 border-t border-subtle-border bg-white">
+            <div className="p-4 sm:p-6 border-t border-subtle-border bg-white">
               <button
                 className="w-full inline-flex items-center justify-center gap-2 bg-deep-charcoal hover:bg-champagne-gold text-white p-3.5 text-xs font-semibold uppercase tracking-[0.14em] rounded transition-colors shadow cursor-pointer"
                 onClick={() => {
