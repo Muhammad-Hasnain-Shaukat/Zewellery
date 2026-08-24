@@ -33,9 +33,16 @@ export default function Footer({ onNavigate, onOpenPolicy }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-12">
           {/* 1. BRAND COLUMN */}
           <div>
-            <h3 className="font-serif text-lg tracking-[0.2em] font-semibold text-[#24211F] mb-2 uppercase">
-              ZEWELLERY<span className="text-champagne-gold">.PK</span>
-            </h3>
+            <div className="flex items-center gap-2.5 mb-2.5">
+              <img
+                src="/images/logo.png"
+                alt="Zewellery.pk Logo"
+                className="h-9 sm:h-10 w-auto object-contain drop-shadow-2xs"
+              />
+              <h3 className="font-serif text-lg tracking-[0.2em] font-semibold text-[#24211F] uppercase leading-none">
+                ZEWELLERY<span className="text-champagne-gold">.PK</span>
+              </h3>
+            </div>
             <p className="text-xs text-[#7A7470] leading-relaxed mb-4">
               Jewellery for every beautiful moment.
             </p>

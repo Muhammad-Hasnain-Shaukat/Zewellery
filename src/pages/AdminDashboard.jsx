@@ -211,8 +211,8 @@ export default function AdminDashboard({ onNavigate }) {
     return (
       <div className="min-h-screen bg-[#1E1E1E] text-warm-ivory flex items-center justify-center p-4 py-12 animate-fade-in">
         <div className="bg-deep-charcoal border border-champagne-gold/40 rounded-lg max-w-md w-full p-8 shadow-2xl relative">
-          <div className="w-14 h-14 rounded-full bg-champagne-gold/15 text-champagne-gold border border-champagne-gold/40 flex items-center justify-center mx-auto mb-4">
-            <Lock size={24} />
+          <div className="w-16 h-16 rounded-full bg-champagne-gold/15 border border-champagne-gold/40 flex items-center justify-center mx-auto mb-4 overflow-hidden p-2.5 shadow-md">
+            <img src="/images/logo.png" alt="Zewellery.pk" className="w-full h-full object-contain drop-shadow-md" />
           </div>
 
           <div className="text-center mb-6">

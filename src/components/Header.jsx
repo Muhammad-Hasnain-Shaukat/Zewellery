@@ -230,22 +230,29 @@ export default function Header({
                 </button>
               </div>
 
-              {/* Brand Logo - Moved to Left, Compact, Responsive */}
-              <div className="flex flex-col items-start justify-center min-w-0">
-                <a
-                  href="/"
-                  className="font-serif text-[17px] xs:text-xl sm:text-[22px] tracking-[0.14em] xs:tracking-[0.18em] sm:tracking-[0.24em] text-[#24211F] font-semibold uppercase leading-none hover:text-[#C5A059] transition-colors whitespace-nowrap"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick('/');
-                  }}
-                >
-                  ZEWELLERY<span className="text-[#C5A059] font-serif">.PK</span>
-                </a>
-                <span className="text-[5.5px] xs:text-[6.5px] sm:text-[7px] tracking-[0.14em] xs:tracking-[0.20em] sm:tracking-[0.26em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none whitespace-nowrap">
-                  TIMELESS BEAUTY. MADE FOR YOU.
-                </span>
-              </div>
+              {/* Brand Logo - New Custom Emblem + Typography */}
+              <a
+                href="/"
+                className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 min-w-0 hover:opacity-90 transition-opacity cursor-pointer group"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick('/');
+                }}
+              >
+                <img
+                  src="/images/logo.png"
+                  alt="Zewellery.pk Emblem"
+                  className="h-7.5 xs:h-8.5 sm:h-10 w-auto object-contain shrink-0 drop-shadow-2xs group-hover:scale-105 transition-transform"
+                />
+                <div className="flex flex-col items-start justify-center min-w-0">
+                  <span className="font-serif text-[15px] xs:text-[17px] sm:text-[21px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.22em] text-[#24211F] font-semibold uppercase leading-none whitespace-nowrap group-hover:text-[#C5A059] transition-colors">
+                    ZEWELLERY<span className="text-[#C5A059] font-serif">.PK</span>
+                  </span>
+                  <span className="text-[5px] xs:text-[6px] sm:text-[7px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.24em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none whitespace-nowrap">
+                    TIMELESS BEAUTY. MADE FOR YOU.
+                  </span>
+                </div>
+              </a>
             </div>
 
             {/* Right: Search Box + Action Icons (Fully Responsive, Never Cuts Off) */}
@@ -341,12 +348,19 @@ export default function Header({
         }`}
         aria-label="Mobile Menu"
       >
-        <div className="flex items-center justify-between p-5 border-b border-[#E8E0D5]">
-          <div className="flex flex-col items-start">
-            <span className="font-serif text-lg tracking-[0.2em] font-semibold text-[#24211F]">
-              ZEWELLERY<span className="text-[#C5A059]">.PK</span>
-            </span>
-            <span className="text-[7px] tracking-[0.22em] uppercase text-[#7A7470]">TIMELESS BEAUTY</span>
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-[#E8E0D5]">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/images/logo.png"
+              alt="Zewellery.pk Emblem"
+              className="h-9 sm:h-10 w-auto object-contain drop-shadow-2xs"
+            />
+            <div className="flex flex-col items-start">
+              <span className="font-serif text-lg tracking-[0.2em] font-semibold text-[#24211F]">
+                ZEWELLERY<span className="text-[#C5A059]">.PK</span>
+              </span>
+              <span className="text-[7px] tracking-[0.22em] uppercase text-[#7A7470]">TIMELESS BEAUTY</span>
+            </div>
           </div>
           <button
             onClick={() => setMobileMenuOpen(false)}
