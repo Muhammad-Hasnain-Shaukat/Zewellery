@@ -255,7 +255,7 @@ export default function AdminDashboard({ onNavigate }) {
                   required
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  placeholder="admin@zewellery.pk"
+                  placeholder="admin@zewellery.pk or admin@zewellery.com"
                   className="w-full pl-9 pr-3.5 py-2.5 bg-white/10 border border-white/20 rounded text-warm-ivory outline-none focus:border-champagne-gold"
                 />
                 <Mail size={14} className="absolute left-3 top-3.5 text-champagne-gold" />
@@ -670,11 +670,24 @@ export default function AdminDashboard({ onNavigate }) {
 
         {/* ---------------- TAB 3: CUSTOMER ACCOUNTS ---------------- */}
         {activeTab === 'users' && (
-          <div className="bg-white rounded-md border border-subtle-border overflow-hidden shadow-xs">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-soft-beige/70 border-b border-subtle-border text-[11px] font-bold uppercase tracking-wider text-charcoal-muted">
+          <div className="flex flex-col gap-4">
+            <div className="p-3.5 bg-amber-50 border border-amber-200 rounded text-xs text-amber-900 flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={16} className="text-amber-700 shrink-0" />
+                <span>
+                  <strong>Master Administrator Security Policy:</strong> Exactly 1 Master Admin account is authorized. Public registration for additional admin accounts is permanently disabled.
+                </span>
+              </span>
+              <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider bg-amber-100/80 px-2.5 py-1 rounded border border-amber-300 shrink-0">
+                1 Admin Active
+              </span>
+            </div>
+
+            <div className="bg-white rounded-md border border-subtle-border overflow-hidden shadow-xs">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-soft-beige/70 border-b border-subtle-border text-[11px] font-bold uppercase tracking-wider text-charcoal-muted">
                     <th className="py-3 px-4">Client Name</th>
                     <th className="py-3 px-4">Email</th>
                     <th className="py-3 px-4">Phone</th>
@@ -715,7 +728,8 @@ export default function AdminDashboard({ onNavigate }) {
               </table>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
         {/* ---------------- MODAL: ADD / EDIT PRODUCT ---------------- */}
         {isProductModalOpen && (

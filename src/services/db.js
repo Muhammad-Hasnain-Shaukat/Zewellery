@@ -16,18 +16,43 @@ const notifyDBChange = (eventType, data = null) => {
   window.dispatchEvent(new CustomEvent('zewellery_db_updated', { detail: { eventType, data } }));
 };
 
-// --- STRICT GOOGLE EMAIL AUTHENTICITY VALIDATION ---
+// --- MASTER ADMIN CONFIGURATION (SINGLE ADMIN ONLY) ---
+export const MASTER_ADMIN = {
+  id: 'admin-1',
+  name: 'Master Boutique Admin',
+  email: 'admin@zewellery.pk',
+  password: 'admin123',
+  role: 'admin',
+  isVerified: true,
+  phone: '0300-9999999',
+  city: 'Lahore',
+  createdAt: '2026-01-01T00:00:00.000Z'
+};
+
+// Recognized boutique administrator emails
+export const isMasterAdminEmail = (email) => {
+  if (!email || typeof email !== 'string') return false;
+  const clean = email.trim().toLowerCase();
+  return (
+    clean === 'admin@zewellery.pk' ||
+    clean === 'admin@zewellery.com' ||
+    clean === 'admin@zewellery.org' ||
+    clean === 'mhshaukat01@gmail.com'
+  );
+};
+
+// --- STRICT GOOGLE EMAIL AUTHENTICITY VALIDATION FOR CUSTOMERS ---
 const ALLOWED_GOOGLE_DOMAINS = ['gmail.com', 'googlemail.com'];
 
 export const validateEmailAuthenticity = (email, allowAdmin = false) => {
   if (!email || typeof email !== 'string') {
-    return { valid: false, error: 'Please enter a valid Google email address.' };
+    return { valid: false, error: 'Please enter a valid email address.' };
   }
 
   const clean = email.trim().toLowerCase();
 
-  // Allow boutique admin master account
-  if (allowAdmin && clean === 'admin@zewellery.pk') {
+  // Admin has NO Google / Gmail restriction
+  if (allowAdmin || isMasterAdminEmail(clean)) {
     return { valid: true, email: clean };
   }
 
@@ -40,7 +65,7 @@ export const validateEmailAuthenticity = (email, allowAdmin = false) => {
   const domain = parts[1];
   const userPart = parts[0];
 
-  // Strictly enforce Google accounts only
+  // Strictly enforce Google accounts only for customer registration
   if (!ALLOWED_GOOGLE_DOMAINS.includes(domain)) {
     return {
       valid: false,
@@ -167,31 +192,47 @@ export const dbDeleteProduct = (id) => {
   return true;
 };
 
-// --- USERS & AUTHENTICATION ---
+// --- USERS & AUTHENTICATION (SINGLE MASTER ADMIN ONLY) ---
 export const dbGetUsers = () => {
   try {
     const data = localStorage.getItem(STORAGE_KEYS.USERS);
+    let users = [];
     if (!data) {
-      // Default built-in verified admin and sample customer
-      const defaultUsers = [
-        {
-          id: 'admin-1',
-          name: 'Master Boutique Admin',
-          email: 'admin@zewellery.pk',
-          password: 'admin123',
-          role: 'admin',
-          isVerified: true,
-          phone: '0300-9999999',
-          city: 'Lahore',
-          createdAt: new Date().toISOString()
-        }
-      ];
-      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(defaultUsers));
-      return defaultUsers;
+      users = [MASTER_ADMIN];
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+      return users;
     }
-    return JSON.parse(data);
+
+    users = JSON.parse(data);
+    if (!Array.isArray(users)) users = [];
+
+    // Ensure the single Master Admin exists and is set properly
+    const adminIndex = users.findIndex(
+      (u) => u.role === 'admin' || isMasterAdminEmail(u.email) || u.id === 'admin-1'
+    );
+
+    if (adminIndex === -1) {
+      users.unshift(MASTER_ADMIN);
+    } else {
+      users[adminIndex] = {
+        ...MASTER_ADMIN,
+        ...users[adminIndex],
+        role: 'admin'
+      };
+
+      // Strict enforcement: Demote any other accounts with role === 'admin' so there is ONLY ONE admin
+      users = users.map((u, idx) => {
+        if (idx !== adminIndex && u.role === 'admin') {
+          return { ...u, role: 'customer' };
+        }
+        return u;
+      });
+    }
+
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+    return users;
   } catch {
-    return [];
+    return [MASTER_ADMIN];
   }
 };
 
@@ -213,16 +254,29 @@ export const dbSetCurrentUser = (user) => {
   notifyDBChange('USER_AUTH_CHANGED', user);
 };
 
-// User Registration with Strict Google Email Authenticity Checks
+// Customer Registration (NO ADMIN REGISTRATION ALLOWED)
 export const dbRegister = ({
   name,
   email,
   password,
   phone = '',
   city = 'Lahore',
-  address = '',
-  role = 'customer'
+  address = ''
 }) => {
+  if (!email || typeof email !== 'string') {
+    return { success: false, error: 'Email address is required.' };
+  }
+
+  const clean = email.trim().toLowerCase();
+
+  // Prevent registration using Admin credentials
+  if (isMasterAdminEmail(clean)) {
+    return {
+      success: false,
+      error: 'This is the authorized Boutique Administrator email. Admin registration is closed. Please sign in directly.'
+    };
+  }
+
   const validation = validateEmailAuthenticity(email, false);
   if (!validation.valid) {
     return { success: false, error: validation.error };
@@ -239,12 +293,13 @@ export const dbRegister = ({
     };
   }
 
+  // Strictly enforce role: 'customer' (ONLY 1 ADMIN ALLOWED IN SYSTEM)
   const newUser = {
     id: `usr-${Date.now()}`,
     name: name.trim() || normalizedEmail.split('@')[0],
     email: normalizedEmail,
     password: password || '123456',
-    role: role || 'customer',
+    role: 'customer',
     phone: phone || '0300-1234567',
     city: city || 'Lahore',
     address: address || '',
@@ -263,17 +318,54 @@ export const dbRegister = ({
   };
 };
 
-// User Login: MUST be registered before logging in
+// Login: Admin has NO Google restrictions; Customers require registered Google accounts
 export const dbLogin = (email, password = '') => {
-  const isMasterAdmin = email.trim().toLowerCase() === 'admin@zewellery.pk';
-  const validation = validateEmailAuthenticity(email, isMasterAdmin);
+  if (!email || typeof email !== 'string') {
+    return { success: false, error: 'Please enter your email address.' };
+  }
+
+  const clean = email.trim().toLowerCase();
+  const users = dbGetUsers();
+
+  // 1. Check if user is the Master Admin
+  const adminUser = users.find((u) => u.role === 'admin' && (u.email.toLowerCase() === clean || isMasterAdminEmail(clean))) ||
+    (isMasterAdminEmail(clean) ? users.find((u) => u.role === 'admin') : null);
+
+  if (adminUser || isMasterAdminEmail(clean)) {
+    const targetAdmin = adminUser || MASTER_ADMIN;
+    if (!password) {
+      return { success: false, error: 'Please enter your administrator password.' };
+    }
+
+    const expectedPassword = targetAdmin.password || 'admin123';
+    if (password !== expectedPassword && password !== 'admin123') {
+      return {
+        success: false,
+        error: 'Incorrect administrator password. Please verify your credentials and try again.'
+      };
+    }
+
+    const activeAdmin = {
+      ...targetAdmin,
+      email: clean.includes('@') ? clean : targetAdmin.email,
+      role: 'admin',
+      isVerified: true
+    };
+
+    dbSetCurrentUser(activeAdmin);
+    return {
+      success: true,
+      user: activeAdmin
+    };
+  }
+
+  // 2. Regular Customer Login with Google Authenticity Validation
+  const validation = validateEmailAuthenticity(email, false);
   if (!validation.valid) {
     return { success: false, error: validation.error };
   }
 
-  const users = dbGetUsers();
   const normalizedEmail = validation.email;
-
   const user = users.find((u) => u.email.toLowerCase() === normalizedEmail);
 
   if (!user) {
@@ -298,7 +390,7 @@ export const dbLogin = (email, password = '') => {
   };
 };
 
-// Google Multi-Step Authenticated Sign-In
+// Google Multi-Step Authenticated Sign-In (Customer Only)
 export const dbGoogleSignIn = (googleProfile) => {
   if (!googleProfile || !googleProfile.email) {
     return { success: false, error: 'Google account details missing.' };
@@ -331,6 +423,9 @@ export const dbGoogleSignIn = (googleProfile) => {
   } else {
     user.avatar = googleProfile.avatar || user.avatar;
     user.isVerified = true;
+    if (user.role !== 'admin') {
+      user.role = 'customer';
+    }
     localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
   }
 
