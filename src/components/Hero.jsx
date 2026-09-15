@@ -33,8 +33,11 @@ export default function Hero({ onShopNow, onExploreCollection }) {
           loop
           muted
           playsInline
+          preload="auto"
+          poster="/images/hero-poster.webp"
           className="w-full h-full object-cover object-center"
         >
+          <source src="/videos/hero.webm" type="video/webm" />
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
 

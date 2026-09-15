@@ -86,10 +86,45 @@ export default function Header({
       >
         <div className="max-w-[1400px] mx-auto px-2.5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] sm:h-[62px] gap-2">
-            {/* Left & Center-Left Flow: Navigation Links + Brand Logo (Image 1 Layout) */}
-            <div className="flex items-center gap-1.5 sm:gap-6 xl:gap-8 min-w-0">
-              {/* Desktop Nav Links */}
-              <nav className="hidden lg:flex items-center gap-5 xl:gap-6 shrink-0" aria-label="Main Navigation">
+            {/* Left Flow: Brand Logo on far left (Mobile has hamburger first, PC has Logo first) + Desktop Nav */}
+            <div className="flex items-center gap-2 sm:gap-5 xl:gap-7 min-w-0">
+              {/* Mobile Hamburger (visible only on mobile/tablet < lg) */}
+              <div className="flex lg:hidden items-center shrink-0">
+                <button
+                  className="flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059] cursor-pointer"
+                  onClick={() => setMobileMenuOpen(true)}
+                  aria-label="Open Mobile Menu"
+                >
+                  <Menu size={19} />
+                </button>
+              </div>
+
+              {/* Brand Logo - On PC it is on the far left, on mobile it follows hamburger */}
+              <a
+                href="/"
+                className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 min-w-0 hover:opacity-90 transition-opacity cursor-pointer group shrink-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick('/');
+                }}
+              >
+                <img
+                  src="/images/logo.png"
+                  alt="Zewellery.pk Emblem"
+                  className="h-7.5 xs:h-8.5 sm:h-10 w-auto object-contain shrink-0 drop-shadow-2xs group-hover:scale-105 transition-transform"
+                />
+                <div className="flex flex-col items-start justify-center min-w-0">
+                  <span className="font-serif text-[15px] xs:text-[17px] sm:text-[21px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.22em] text-[#24211F] font-semibold uppercase leading-none whitespace-nowrap group-hover:text-[#C5A059] transition-colors">
+                    ZEWELLERY<span className="text-[#C5A059] font-serif">.PK</span>
+                  </span>
+                  <span className="text-[5px] xs:text-[6px] sm:text-[7px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.24em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none whitespace-nowrap">
+                    TIMELESS BEAUTY. MADE FOR YOU.
+                  </span>
+                </div>
+              </a>
+
+              {/* Desktop Nav Links (PC View: situated right after Brand Logo) */}
+              <nav className="hidden lg:flex items-center gap-5 xl:gap-6 shrink-0 lg:ml-3 xl:ml-5" aria-label="Main Navigation">
                 <a
                   href="/"
                   className={`text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
@@ -218,41 +253,6 @@ export default function Header({
                   ABOUT
                 </a>
               </nav>
-
-              {/* Mobile Hamburger */}
-              <div className="flex lg:hidden items-center shrink-0">
-                <button
-                  className="flex items-center justify-center w-8 h-8 text-[#24211F] hover:text-[#C5A059] cursor-pointer"
-                  onClick={() => setMobileMenuOpen(true)}
-                  aria-label="Open Mobile Menu"
-                >
-                  <Menu size={19} />
-                </button>
-              </div>
-
-              {/* Brand Logo - New Custom Emblem + Typography */}
-              <a
-                href="/"
-                className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 min-w-0 hover:opacity-90 transition-opacity cursor-pointer group"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick('/');
-                }}
-              >
-                <img
-                  src="/images/logo.png"
-                  alt="Zewellery.pk Emblem"
-                  className="h-7.5 xs:h-8.5 sm:h-10 w-auto object-contain shrink-0 drop-shadow-2xs group-hover:scale-105 transition-transform"
-                />
-                <div className="flex flex-col items-start justify-center min-w-0">
-                  <span className="font-serif text-[15px] xs:text-[17px] sm:text-[21px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.22em] text-[#24211F] font-semibold uppercase leading-none whitespace-nowrap group-hover:text-[#C5A059] transition-colors">
-                    ZEWELLERY<span className="text-[#C5A059] font-serif">.PK</span>
-                  </span>
-                  <span className="text-[5px] xs:text-[6px] sm:text-[7px] tracking-[0.12em] xs:tracking-[0.16em] sm:tracking-[0.24em] uppercase text-[#7A7470] font-medium mt-0.5 leading-none whitespace-nowrap">
-                    TIMELESS BEAUTY. MADE FOR YOU.
-                  </span>
-                </div>
-              </a>
             </div>
 
             {/* Right: Search Box + Action Icons (Fully Responsive, Never Cuts Off) */}
