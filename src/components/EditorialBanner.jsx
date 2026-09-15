@@ -13,6 +13,7 @@ export default function EditorialBanner({ onExploreCollection }) {
               alt="The Everyday Edit - Couple Hands with Rings"
               className="w-full h-full object-cover object-center"
               loading="lazy"
+              decoding="async"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = '/images/products/ring-1-main.jpg';

@@ -37,6 +37,7 @@ export default function CategorySection({ onSelectCategory }) {
                   alt={`Zewellery ${category.name} Collection`}
                   className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/images/products/cat-earrings.jpg';

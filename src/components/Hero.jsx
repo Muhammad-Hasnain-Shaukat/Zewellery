@@ -25,8 +25,13 @@ export default function Hero({ onShopNow, onExploreCollection }) {
 
   return (
     <section id="hero" className="bg-[#FAF7F2] text-[#24211F]" aria-label="Hero Experience">
-      {/* 1. Full-Screen 4K UHD Video Section (Full Viewport - NOT Cut from Bottom) */}
-      <div className="relative w-full h-[calc(100vh-92px)] min-h-[580px] max-h-[1080px] bg-[#1E1B18] overflow-hidden">
+      {/* 1. Full-Screen Video Section (Full Viewport - Seamless Zero-Lag Poster Fallback) */}
+      <div
+        className="relative w-full h-[calc(100vh-92px)] min-h-[580px] max-h-[1080px] bg-[#1E1B18] overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: `url('/images/hero-poster.webp')`
+        }}
+      >
         <video
           ref={videoRef}
           autoPlay
@@ -66,7 +71,7 @@ export default function Hero({ onShopNow, onExploreCollection }) {
         <div
           className="w-full min-h-[520px] sm:min-h-[580px] lg:min-h-[640px] bg-cover bg-right sm:bg-center relative flex items-center"
           style={{
-            backgroundImage: `url('/images/real-silk-flatlay.jpg')`
+            backgroundImage: `url('/images/real-silk-flatlay.webp'), url('/images/real-silk-flatlay.jpg')`
           }}
         >
           {/* Subtle Left Gradient Overlay for crisp text contrast */}

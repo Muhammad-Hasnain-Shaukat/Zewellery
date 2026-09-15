@@ -26,6 +26,7 @@ export default function BrandStory({ onReadStory }) {
                 alt="Jewellery With a Story - Zewellery.pk Muse"
                 className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-700"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
