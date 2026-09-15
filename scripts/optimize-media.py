@@ -38,7 +38,7 @@ def optimize_video():
     cmd_mp4 = [
         FFMPEG, "-y",
         "-i", raw_video,
-        "-vf", "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2",
+        "-vf", "crop=1796:1010:(1920-1796)/2:35,scale=1920:1080",
         "-c:v", "libx264",
         "-preset", "medium",
         "-crf", "24",

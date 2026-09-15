@@ -27,7 +27,7 @@ export default function Hero({ onShopNow, onExploreCollection }) {
     <section id="hero" className="bg-[#FAF7F2] text-[#24211F]" aria-label="Hero Experience">
       {/* 1. Full-Screen Video Section (Full Viewport - Seamless Zero-Lag Poster Fallback) */}
       <div
-        className="relative w-full h-[calc(100vh-92px)] min-h-[580px] max-h-[1080px] bg-[#1E1B18] overflow-hidden bg-cover bg-center"
+        className="relative w-full h-[calc(100vh-92px)] sm:h-[calc(100vh-92px)] min-h-[540px] sm:min-h-[580px] max-h-[1080px] bg-[#FAF7F2] overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage: `url('/images/hero-poster.webp')`
         }}
